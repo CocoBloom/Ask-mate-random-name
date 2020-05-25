@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title> Add new answer | Ask mate</title>
+    </head>
+    <body>
+        <h1>Add new answer</h1>
+        <form action="/question/{{ question_id }}/new-answer" method="post">
+
+            <label for="new_answer"> User Story: </label><br>
+            <textarea id="new_answer" name="answer" rows="4" cols="60" required></textarea><br><br>
+
+            <label for="img">Select image:</label>
+            <input type="file" id="img" name="img" accept="image/*">
+            <br><br><br>
+
+            <button type="submit" > Send it! </button>
+        </form>
+    </body>
+</html>

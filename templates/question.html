@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question | Ask mate</title>
+</head>
+<body>
+<h1>{{ question_id }}. question</h1>
+    <h2> {{ title }}</h2>
+    <p> {{ question }} </p>
+
+    <form action="/question/{{question_id}}/delete" method="post">
+        <button>DELETE</button>
+    </form>
+
+    <br>
+    <h2> Answers: </h2>
+    {% for answer in question_answers %}
+        <p> {{ answer[0] }} </p>
+    {% endfor %}
+
+    <p1 id="content">{% block content %}{% endblock %}</p1>
+
+
+
+</body>
+</html>

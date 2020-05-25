@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of questions</title>
+</head>
+<body>
+    <table>
+        {% for row in list_of_questions%}
+            <tr>
+                {%for cell in row%}
+                    {% if list_of_questions.index(row)==0%}
+                        <th>{{cell}}</th>
+                    {%endif%}
+                {%endfor%}
+            </tr>
+        {%endfor%}
+        {%for row in list_of_questions[::-1]%}
+            <tr>
+                {%for cell in row%}
+                    {% if list_of_questions.index(row)!=0%}
+                        {% if row.index(cell) == 0%}
+                            <td><a href="http://localhost:8000/question/{{cell}}">{{cell}} </a></td>
+                        {%else%}
+                            <td>{{cell}}</td>
+                        {%endif%}
+                    {%endif%}
+                {%endfor%}
+            </tr>
+        {%endfor%}
+    </table>
+
+
+
+
+
+</div>
+</body>
+</html>
