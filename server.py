@@ -48,7 +48,7 @@ def question_page(question_id):
 def add_question():
     if request.method == "POST":
         list_of_questions = data_manager.get_list_of_questions("sample_data/question.csv")
-        new_question = [util.create_new_id(list_of_questions), int(time.time()), 0, 0, request.form['questiontitle'], request.form['questionbody'], '']
+        new_question = [len(list_of_questions), int(time.time()), 0, 0, request.form['questiontitle'], request.form['questionbody'], '']
         list_of_questions.append(new_question)
         data_manager.write_csv("sample_data/question.csv", list_of_questions)
         return redirect('/list')
@@ -69,13 +69,20 @@ def delete_question(question_id):
 
 @app.route('/question/<question_id>/edit', methods=['GET', 'POST'])
 def edit_question(question_id):
-#     if request.method == 'POST':
-#         list_of_questions = data_manager.get_list_of_questions("sample_data/question.csv")
-#         for id in list_of_questions:
-#             if question_id == id[0]:
-#                 list_of_questions.remove(id)
-#         data_manager.write_csv("sample_data/question.csv", list_of_questions)
-    return render_template("edit_questions.html", question_id=question_id)
+    list_of_questions = data_manager.get_list_of_questions("sample_data/question.csv")
+    if request.method == 'GET':
+        for question in list_of_questions:
+            if question_id == question[0]:
+                question_title = question[4]
+                question_text = question[5]
+        return render_template("edit_question_new.html", question_text=question_text, question_title=question_title, question_id=question_id)
+    else:
+        for question in list_of_questions:
+            if question[0] == question_id:
+                question[4] = request.form['edittitle']
+                question[5] = request.form['editbody']
+        data_manager.write_csv("sample_data/question.csv", list_of_questions)
+        return redirect('/question/'+ question_id)
 
 
 
