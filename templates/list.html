@@ -3,37 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>List of questions</title>
+    <style>
+        thead,tfoot {background-color: #3f87a6;  color: #fff}
+        tbody {background-color: #e4f0f5;}
+        caption {padding: 50px; caption-side: top; text-align: center; font-size:30px}
+        table {
+        border-collapse: collapse;
+        border: 2px solid rgb(200, 200, 200);
+        letter-spacing: 1px;
+        font-family: sans-serif;
+        font-size: .8rem; }
+        td,th {border: 1px solid rgb(190, 190, 190);
+        padding: 5px 10px;}
+        td {text-align: center;}
+    </style>
 </head>
 <body>
-    <table>
-        {% for row in list_of_questions%}
-            <tr>
-                {%for cell in row%}
-                    {% if list_of_questions.index(row)==0%}
-                        <th>{{cell}}</th>
-                    {%endif%}
-                {%endfor%}
-            </tr>
-        {%endfor%}
-        {%for row in list_of_questions[::-1]%}
+    <form action="http://localhost:8000/list" method="POST">
+    <table border="1"
+           width="1000" cellspacing="3">
+    <caption>ASK_MATE</caption>
+        <thead>
+            {% for row in list_of_questions%}
+                <tr>
+                    {%for cell in row%}
+                        {% if list_of_questions.index(row)==0%}
+                        <th><button name="{{cell}}" id="{{cell}}" value="{{cell}}">{{cell}}</button></th>
+                        {%endif%}
+                    {%endfor%}
+                </tr>
+            {%endfor%}
+        </thead>
+        {%for row in list_of_questions%}
             <tr>
                 {%for cell in row%}
                     {% if list_of_questions.index(row)!=0%}
                         {% if row.index(cell) == 0%}
-                            <td><a href="http://localhost:8000/question/{{cell}}">{{cell}} </a></td>
+                            <td width="20"><a href="http://localhost:8000/question/{{cell}}">{{cell}} </a></td>
                         {%else%}
-                            <td>{{cell}}</td>
+                            <td width ="80">{{cell}}</td>
                         {%endif%}
                     {%endif%}
                 {%endfor%}
             </tr>
         {%endfor%}
     </table>
+    </form>
 
-
-
-
-
-</div>
 </body>
 </html>
