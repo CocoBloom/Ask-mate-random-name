@@ -9,9 +9,14 @@
     <h2> {{ title }}</h2>
     <p> {{ question }} </p>
 
-    <form action="/question/{{question_id}}/delete" method="post">
-        <button>DELETE</button>
+    <form action="/question/{{question_id}}/edit" >
+        <button>Edit</button>
     </form>
+
+    <form action="/question/{{question_id}}/delete" method="post">
+        <button>Delete</button>
+    </form>
+
 
     <br>
     <h2> Answers: </h2>
@@ -19,7 +24,9 @@
         <p> {{ answer[0] }} </p>
     {% endfor %}
 
-    <p1 id="content">{% block content %}{% endblock %}</p1>
+    <form action="/question/{{question_id}}/new-answer">
+        <button>Add answer</button>
+    </form>
 
 
 
