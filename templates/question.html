@@ -7,28 +7,49 @@
 <body>
 <h1>{{ question_id }}. question</h1>
     <h2> {{ title }}</h2>
-    <p> {{ question }} </p>
-
-    <form action="/question/{{question_id}}/edit" >
-        <button>Edit</button>
-    </form>
-
-    <form action="/question/{{question_id}}/delete" method="post">
-        <button>Delete</button>
-    </form>
-
-
+    <table>
+            <tr><td>{{ question }}</td>
+                {% if image != '' %}
+                    <td><img src="{{ url_for('static', filename='image') }}" alt="pimpirimpi" height="600" width="450"></td>
+                {% endif %}
+            </tr>
+    </table>
+    <br>
+    <table>
+        <tr>
+            <td><form action="/question/{{question_id}}/edit" >
+                <button>Edit</button>
+            </form>
+            </td>
+            <td>
+            <form action="/question/{{question_id}}/delete" method="post">
+                <button>Delete</button>
+            </form>
+            </td>
+        </tr>
+    </table>
     <br>
     <h2> Answers: </h2>
-    {% for answer in question_answers %}
-        <p> {{ answer[0] }} </p>
-    {% endfor %}
-
+    <table>
+        {% for answer in question_answers %}
+            <tr><td>> {{ answer[4] }}</td>
+                <td>{% if answer[5] != '' %}
+                    <img src="{{ url_for('static', filename=answer[5]) }}" alt="pimpirimpi" height="100">
+                {% endif %}</td>
+                <td><form action="/answer/{{answer[0]}}/delete" method="POST">
+                <button>Delete</button>
+                </form></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
     <form action="/question/{{question_id}}/new-answer">
         <button>Add answer</button>
     </form>
 
+    <br>
 
+    <a href="/list">Return to main page</a>
 
 </body>
 </html>
