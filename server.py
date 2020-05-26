@@ -69,6 +69,19 @@ def delete_question(question_id):
     return redirect('/list')
 
 
+
+@app.route('/question/<question_id>/edit', methods=['GET', 'POST'])
+def edit_question(question_id):
+#     if request.method == 'POST':
+#         list_of_questions = data_manager.get_list_of_questions("sample_data/question.csv")
+#         for id in list_of_questions:
+#             if question_id == id[0]:
+#                 list_of_questions.remove(id)
+#         data_manager.write_csv("sample_data/question.csv", list_of_questions)
+    return render_template("edit_questions.html")
+
+
+
 @app.route("/question/<int:question_id>/new-answer", methods=['GET', 'POST'])
 def answer_page(question_id):
     if request.method == 'POST':

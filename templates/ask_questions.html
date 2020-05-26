@@ -2,19 +2,23 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Ask a question</title>
+     {% block head %}
+    <title>{%block title %} Add a question{% endblock %}</title>
+    {% endblock%}
 </head>
 <body>
 <form action="" method="post">
-    <h1>Ask a question</h1>
-    <input type="text" name="questiontitle" placeholder="Question title"><br>
-    <textarea name="questionbody" rows="10" cols="50" placeholder="Place your question here"></textarea>
+    {% block header %}<h1>Ask a question</h1>{% endblock %}
+    {%block title_of_question%}<input type="text" name="questiontitle" placeholder="Question title"><br>{%endblock%}
+    <textarea name="questionbody" rows="10" cols="50" placeholder="Place your question here"> {% block questionbody %}{% endblock %}</textarea>
     <br>
     <button type="submit">Submit</button>
     <button type="reset">Reset</button>
 </form>
     <br>
+    {% block link %}
     <a href="/">Return to main page</a>
     <!--Buttonnel is lehetne -->
+    {% endblock %}
 </body>
 </html>
