@@ -7,7 +7,7 @@
 <body>
 <h1>{{ question_id }}. question</h1>
     <h2> {{ title }}</h2>
-    <table>
+    <table style="width:50%">
             <tr><td>{{ question }}</td>
                 {% if image != '' %}
                     <td><img src="{{ url_for('static', filename='image') }}" alt="pimpirimpi" height="600" width="450"></td>
@@ -29,26 +29,41 @@
         </tr>
     </table>
     <br>
+
     <h2> Answers: </h2>
-    <table>
+    <table style="width:50%">
         {% for answer in question_answers %}
-            <tr><td>> {{ answer[4] }}</td>
+        <tr style="height:100px" ><td>> {{ answer[4] }}</td>
                 <td>{% if answer[5] != '' %}
                     <img src="{{ url_for('static', filename=answer[5]) }}" alt="pimpirimpi" height="100">
-                {% endif %}</td>
-                <td><form action="/answer/{{answer[0]}}/delete" method="POST">
+                {% endif %}
+            </td>
+            <td>
+                Votes: {{ answer[2] }}
+            </td>
+            <td>
+                <form action="/answer/{{answer[0]}}/vote_up" >
+                <button>Vote up</button>
+                </form>
+            </td>
+            <td>
+                <form action="/answer/{{answer[0]}}/vote_down" >
+                <button>Vote down</button>
+                </form>
+            </td>
+            <td>
+                <form action="/answer/{{answer[0]}}/delete" >
                 <button>Delete</button>
-                </form></td>
-            </tr>
+                </form>
+            </td>  </tr>
         {% endfor %}
     </table>
+
     <br>
     <form action="/question/{{question_id}}/new-answer">
         <button>Add answer</button>
     </form>
-
     <br>
-
     <a href="/list">Return to main page</a>
 
 </body>
