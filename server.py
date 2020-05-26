@@ -49,8 +49,7 @@ def question_page(question_id):
 def add_question():
     if request.method == "POST":
         list_of_questions = data_manager.get_list_of_questions("sample_data/question.csv")
-        # id-t, submission timeot honnan kap?
-        new_question = [create_new_id(list_of_questions), int(time.time()), 0, 0, request.form['questiontitle'], request.form['questionbody'], '']
+        new_question = [util.create_new_id(list_of_questions), int(time.time()), 0, 0, request.form['questiontitle'], request.form['questionbody'], '']
         list_of_questions.append(new_question)
         data_manager.write_csv("questions.csv", list_of_questions)
         return redirect('/list')
@@ -78,23 +77,22 @@ def edit_question(question_id):
 #             if question_id == id[0]:
 #                 list_of_questions.remove(id)
 #         data_manager.write_csv("sample_data/question.csv", list_of_questions)
-    return render_template("edit_questions.html")
+    return render_template("edit_questions.html", question_id=question_id)
 
 
 
-@app.route("/question/<int:question_id>/new-answer", methods=['GET', 'POST'])
+@app.route("/question/<question_id>/new-answer", methods=['GET', 'POST'])
 def answer_page(question_id):
     if request.method == 'POST':
-        list_of_questions = data_manager.get_list_of_questions('sample_data/question.csv')
-        list_of_questions.append([util.create_new_id(list_of_questions), int(time.time()), 0, 0,request.form['answer'], request.form['img']])
-        data_manager.write_csv("sample_data/question.csv", list_of_questions)
-        return redirect('/question/'+str(question_id))
+        list_of_answers = data_manager.get_list_of_questions('sample_data/answer.csv')
+        list_of_answers.append([util.create_new_id(list_of_answers), int(time.time()), 0, question_id,
+                                  request.form['answer'], request.form['img']])
+        data_manager.write_csv("sample_data/answer.csv", list_of_answers)
+        return redirect('/question/'+ question_id)
     return render_template("new_answer.html", question_id=question_id)
 
 
 if __name__ == "__main__":
-    app.run(
-        host='0.0.0.0',
-        port=8000,
-        debug=True,
-    )
+    app.run(debug=True,
+            port=8000,
+            host='0.0.0.0')
