@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit question</title>
+</head>
+<body>
+<form action="/question/{{ question_id }}/edit" method="post">
+    <h1>Edit your question</h1>
+    <input type="text" name="edittitle" placeholder="Question title" value={{question_title}}><br>
+    <textarea name="editbody" rows="10" cols="50" placeholder="Place your question here">{{question_text}}</textarea>
+    <br>
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+    <br><br>
+    <a href="/question/{{ question_id }}">Return to the question page</a>
+</body>
+</html>
