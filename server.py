@@ -12,17 +12,14 @@ app = Flask(__name__)
 def display_list():
     list_of_questions = data_manager.get_list_of_questions("sample_data/question.csv")
     if request.method == "POST":
-        counters={}
         for head in list_of_questions[0]:
             try:
                 mode = request.form[head]
-                counter =1
-                direction = data_manager.get_direction(counter)
+                direction=data_manager.find_index(list_of_questions,mode)
                 ordered_list = data_manager.get_an_order(list_of_questions=list_of_questions, mode = mode, bool=direction)
                 data_manager.write_csv("sample_data/question.csv", new_data=ordered_list)
             except:
                 continue
-
         return redirect('/')
     else:
         return render_template("list.html", list_of_questions=list_of_questions)
