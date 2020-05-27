@@ -29,10 +29,10 @@ def display_list():
 def question_page(question_id):
     list_of_questions = data_manager.get_list_of_questions('sample_data/question.csv')
     list_of_answers = data_manager.get_list_of_questions('sample_data/answer.csv')
-
-    title = list_of_questions[question_id][4]
-    question = list_of_questions[question_id][5]
-    image = list_of_questions[question_id][6]
+    correct_row = [i for i in range(len(list_of_questions)) if list_of_questions[i][0] == str(question_id)][0]
+    title = list_of_questions[correct_row][4]
+    question = list_of_questions[correct_row][5]
+    image = list_of_questions[correct_row][6]
     str_id = str(question_id)
 
     question_answers = [answer for answer in list_of_answers if answer[3] == str_id]
@@ -84,6 +84,7 @@ def edit_question(question_id):
             if question[0] == question_id:
                 question[4] = request.form['edittitle']
                 question[5] = request.form['editbody']
+                question[6] = request.form['editimage']
         data_manager.write_csv("sample_data/question.csv", list_of_questions)
         return redirect('/question/'+ question_id)
 
