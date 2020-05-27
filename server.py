@@ -100,6 +100,27 @@ def answer_page(question_id):
     return render_template("new_answer.html", question_id=question_id)
 
 
+@app.route('/question/<question_id>/vote_up')
+def vote_up_question(question_id):
+    list_of_questions = data_manager.get_list_of_questions("sample_data/question.csv")
+    for question in list_of_questions:
+        if question_id == question[0]:
+            question[3] = str(int(question[3]) + 1)
+    data_manager.write_csv("sample_data/question.csv", list_of_questions)
+    return redirect('/list')
+
+
+@app.route('/question/<question_id>/vote_down')
+def vote_down_question(question_id):
+    list_of_questions = data_manager.get_list_of_questions("sample_data/question.csv")
+    for question in list_of_questions:
+        if question_id == question[0]:
+            question[3] = str(int(question[3]) - 1)
+    data_manager.write_csv("sample_data/question.csv", list_of_questions)
+    return redirect('/list')
+
+
+
 @app.route('/answer/<answer_id>/vote_up')
 def vote_up_answer(answer_id):
     list_of_answers = data_manager.get_list_of_questions("sample_data/answer.csv")

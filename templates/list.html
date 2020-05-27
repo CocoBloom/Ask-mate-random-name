@@ -27,18 +27,19 @@
         <thead>
             {% for row in list_of_questions%}
                 <tr>
-                    {%for cell in row%}
-                        {% if list_of_questions.index(row)==0%}
+                    {% if list_of_questions.index(row)==0%}
+                        {%for cell in row%}
                         <th><button name="{{cell}}" id="{{cell}}" value="{{cell}}">{{cell}}</button></th>
-                        {%endif%}
-                    {%endfor%}
+                        {%endfor%}
+                    <th><button> voting </button></th>
+                    {%endif%}
                 </tr>
             {%endfor%}
         </thead>
         {%for row in list_of_questions%}
-            <tr>
-                {%for cell in row%}
-                    {% if list_of_questions.index(row)!=0%}
+            {% if list_of_questions.index(row)!=0%}
+                <tr>
+                    {%for cell in row%}
                         {% if row.index(cell) == 0%}
                             <td width="20"><a href="http://localhost:8000/question/{{cell}}">{{cell}} </a></td>
                         {% elif row.index(cell) == 6 %}
@@ -50,9 +51,15 @@
                         {%else%}
                             <td width ="80">{{cell}}</td>
                         {%endif%}
-                    {%endif%}
-                {%endfor%}
-            </tr>
+                    {%endfor%}
+
+                    <td><form action="/question/{{row[0]}}/vote_up" >
+                    <button>Vote up</button></form>
+
+                    <form action="/question/{{row[0]}}/vote_down" >
+                    <button>Vote down</button></form></td>
+                </tr>
+            {%endif%}
         {%endfor%}
     </table>
     </form>
