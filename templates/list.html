@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <title>List of questions</title>
     <style>
+        body {
+        background-image: url('https://s3.amazonaws.com/noupe/2009/10/bgpatterns.jpg');
+        background-repeat: repeat;
+        background-attachment: fixed;
+        background-position: center;
+      }
         thead,tfoot {background-color: #3f87a6;  color: #fff}
         tbody {background-color: #e4f0f5;}
         caption {padding: 50px; caption-side: top; text-align: center; font-size:30px}
+        table.center {
+        margin-left: auto;
+        margin-right: auto;
+            }
         table {
         border-collapse: collapse;
         border: 2px solid rgb(200, 200, 200);
@@ -21,17 +31,22 @@
 <body>
     <a href="/add-question">Add a question</a>
     <form action="http://localhost:8000/list" method="POST">
-    <table border="1"
-           width="1000" cellspacing="3">
+    <table class = center>
     <caption>ASK_MATE</caption>
         <thead>
             {% for row in list_of_questions%}
                 <tr>
                     {% if list_of_questions.index(row)==0%}
                         {%for cell in row%}
-                        <th><button name="{{cell}}" id="{{cell}}" value="{{cell}}">{{cell}}</button></th>
+                        <th>
+                            <form action="http://localhost:8000/list" method="GET">
+                            <input type="hidden" name="order_by" value="{{cell}}">{{cell.upper()}}<br><br>
+                            <button name="order_direction"style="background-color:#4CAF50" value="False">↑</button>
+                            <button name="order_direction" style="background-color:#4CAF50" value="True">↓</button>
+                            </form>
+                        </th>
                         {%endfor%}
-                    <th><button> voting </button></th>
+                    <th><text> VOTING </text></th>
                     {%endif%}
                 </tr>
             {%endfor%}
@@ -41,19 +56,19 @@
                 <tr>
                     {%for cell in row%}
                         {% if row.index(cell) == 0%}
-                            <td width="20"><a href="http://localhost:8000/question/{{cell}}">{{cell}} </a></td>
+                            <td width="50"><a href="http://localhost:8000/question/{{cell}}"> {{ cell}} </a></td>
                         {% elif row.index(cell) == 6 %}
                             {% if cell != '' %}
                             <td><img src="{{ cell }}" alt="pimpirimpi" height="100"></td>
                             {%else%}
-                            <td height = "100"> </td>
+                            <td height = "80"> </td>
                             {% endif %}
                         {%else%}
-                            <td width ="80">{{cell}}</td>
+                            <td width ="95">{{cell}}</td>
                         {%endif%}
                     {%endfor%}
 
-                    <td><form action="/question/{{row[0]}}/vote_up" >
+                    <td width ="80"><form action="/question/{{row[0]}}/vote_up" >
                     <button>Vote up</button></form>
 
                     <form action="/question/{{row[0]}}/vote_down" >
