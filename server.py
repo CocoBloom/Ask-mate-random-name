@@ -100,6 +100,17 @@ def answer_page(question_id):
     return render_template("new_answer.html", question_id=question_id)
 
 
+@app.route('/answer/<answer_id>/delete')
+def delete_answer(answer_id):
+    list_of_answers = data_manager.get_list_of_questions("sample_data/answer.csv")
+    question_id = [answer[3] for answer in list_of_answers if answer[0] == answer_id][0]
+    for answer in list_of_answers:
+        if answer_id == answer[0]:
+            list_of_answers.remove(answer)
+    data_manager.write_csv("sample_data/answer.csv", list_of_answers)
+    return redirect('/question/'+ question_id)
+
+
 @app.route('/question/<question_id>/vote_up')
 def vote_up_question(question_id):
     list_of_questions = data_manager.get_list_of_questions("sample_data/question.csv")
@@ -118,7 +129,6 @@ def vote_down_question(question_id):
             question[3] = str(int(question[3]) - 1)
     data_manager.write_csv("sample_data/question.csv", list_of_questions)
     return redirect('/list')
-
 
 
 @app.route('/answer/<answer_id>/vote_up')
