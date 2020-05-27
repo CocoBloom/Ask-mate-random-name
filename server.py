@@ -60,10 +60,15 @@ def add_question():
 def delete_question(question_id):
     if request.method == 'POST':
         list_of_questions = data_manager.get_list_of_questions("sample_data/question.csv")
+        list_of_answer = data_manager.get_list_of_questions("sample_data/answer.csv")
         for id in list_of_questions:
             if question_id == id[0]:
                 list_of_questions.remove(id)
-        data_manager.write_csv("sample_data/question.csv", list_of_questions)
+                data_manager.write_csv("sample_data/question.csv", list_of_questions)
+        for answer in list_of_answer:
+             if question_id == answer[3]:
+                 list_of_answer.remove(answer)
+                 data_manager.write_csv("sample_data/answer.csv", list_of_answer)
     return redirect('/list')
 
 
@@ -95,17 +100,6 @@ def answer_page(question_id):
         data_manager.write_csv("sample_data/answer.csv", list_of_answers)
         return redirect('/question/'+ question_id)
     return render_template("new_answer.html", question_id=question_id)
-
-
-@app.route('/answer/<answer_id>/delete')
-def delete_answer(answer_id):
-    list_of_answers = data_manager.get_list_of_questions("sample_data/answer.csv")
-    question_id = [answer[3] for answer in list_of_answers if answer[0] == answer_id][0]
-    for answer in list_of_answers:
-        if answer_id == answer[0]:
-            list_of_answers.remove(answer)
-    data_manager.write_csv("sample_data/answer.csv", list_of_answers)
-    return redirect('/question/'+ question_id)
 
 
 @app.route('/answer/<answer_id>/vote_up')
