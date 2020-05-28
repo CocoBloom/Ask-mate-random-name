@@ -5,7 +5,7 @@
     <title>List of questions</title>
     <style>
         body {
-        background-image: url('https://s3.amazonaws.com/noupe/2009/10/bgpatterns.jpg');
+        background-image: url('https://s3.amazonaws.com/noupe/2009/10/squidfingers.jpg');
         background-repeat: repeat;
         background-attachment: fixed;
         background-position: center;
@@ -26,13 +26,16 @@
         td,th {border: 1px solid rgb(190, 190, 190);
         padding: 5px 10px;}
         td {text-align: center;}
+        #caption{
+            color: white;
+        }
     </style>
 </head>
 <body>
-    <a href="/add-question">Add a question</a>
-    <form action="http://localhost:8000/list" method="POST">
+    <form action="http://localhost:8000/list">
     <table class = center>
-    <caption>ASK_MATE</caption>
+    <caption id="caption"><img src="buttons/static/banner.png" alt="Ask-Question-Ask-Mate" width="60"><br>ASK_MATE<br>
+    <a href="add-question"><img src="buttons/static/realwhitebutton.png" alt="Ask-Question-Ask-Mate" width="80"></a></caption>
         <thead>
             {% for row in list_of_questions%}
                 <tr>
@@ -68,11 +71,11 @@
                         {%endif%}
                     {%endfor%}
 
-                    <td width ="80"><form action="/question/{{row[0]}}/vote_up" >
-                    <button>Vote up</button></form>
+                    <td width ="80"><form action="/question/{{row[0]}}/vote_up">
+                        <button><img src="buttons/static/try.png" width="18"></button></form>
 
                     <form action="/question/{{row[0]}}/vote_down" >
-                    <button>Vote down</button></form></td>
+                    <button><img src="buttons/static/try2.png" width="18"></button></form></td>
                 </tr>
             {%endif%}
         {%endfor%}

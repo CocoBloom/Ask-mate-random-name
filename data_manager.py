@@ -32,10 +32,10 @@ def get_an_order(used_list,list_of_questions,mode,direction):
     print(direction)
     index = (list_of_questions[0]).index(mode)
     if direction == "True":
-        ordered_list = ([list_of_questions[0]] + sorted(used_list, key=lambda x: x[index], reverse=False))
+        ordered_list = ([list_of_questions[0]] + sorted(used_list, key=lambda x: x[index], reverse=True))
         print("trueorder",ordered_list)
     else:
-        ordered_list = ([list_of_questions[0]] + sorted(used_list, key=lambda x: x[index], reverse=True))
+        ordered_list = ([list_of_questions[0]] + sorted(used_list, key=lambda x: x[index], reverse=False))
         print("falseorder",ordered_list)
     return ordered_list
 
