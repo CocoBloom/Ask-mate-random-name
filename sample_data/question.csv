@@ -1,7 +1,8 @@
 id,submission_time,view_number,vote_number,title,message,image
-5,1590566809,0,4,lets see, lesszi,https://www.egyedikutya.hu/wp-content/uploads/2017/11/shutterstock_206851003.jpg
+6,1590666637,3,0,blah blah,wda,greenback1.png
+5,1590566809,8,4,lets see, lesszi,https://www.egyedikutya.hu/wp-content/uploads/2017/11/shutterstock_206851003.jpg
 4,1590504897,0,5,teszt, úgy néz ki megyeget valami,
-3,1493015432,1364,56,Drawing canvas with an image picked with Cordova Camera Plugin,"I'm getting an image from device and drawing a canvas with filters using Pixi JS. It works all well using computer to get an image. But when I'm on IOS, it throws errors such as cross origin issue, or that I'm trying to use an unknown format.
+3,1493015432,1364,57,Drawing canvas with an image picked with Cordova Camera Plugin,"I'm getting an image from device and drawing a canvas with filters using Pixi JS. It works all well using computer to get an image. But when I'm on IOS, it throws errors such as cross origin issue, or that I'm trying to use an unknown format.
 
 This is the code I'm using to draw the image (that works on web/desktop but not cordova built ios app)",
 2,1493068124,15,15,Wordpress loading multiple jQuery Versions,"I developed a plugin that uses the jquery booklet plugin (http://builtbywill.com/booklet/#/) this plugin binds a function to $ so I cann call $('.myBook').booklet();

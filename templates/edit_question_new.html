@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
+    <style>
+        body {
+        background-image: url('https://s3.amazonaws.com/noupe/2009/10/squidfingers.jpg');
+        background-repeat: repeat;
+        background-attachment: fixed;
+        background-position: center;
+      }
+        </style>
     <meta charset="UTF-8">
     <title>Edit question</title>
 </head>
@@ -13,7 +21,10 @@
     <input type="text" name="editimage" placeholder="Place your image's URL here!" value={{question_image}}>
     <button type="submit">Submit</button>
     <button type="reset">Reset</button>
+    <form method=post enctype=multipart/form-data>
+      <input type=file name=questionimage>
+    </form>
     <br><br>
-    <a href="/question/{{ question_id }}">Return to the question page</a>
+    <a href="/question/{{ question_id }}"><img src="/static/buttons/whiteback.png" alt="Return to question page" width="35"></a>
 </body>
 </html>

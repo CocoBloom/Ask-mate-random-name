@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        body {
+        background-image: url('https://s3.amazonaws.com/noupe/2009/10/squidfingers.jpg');
+        background-repeat: repeat;
+        background-attachment: fixed;
+        background-position: center;
+      }
+        </style>
     <meta charset="UTF-8">
     <title>Question | Ask mate</title>
 </head>
@@ -43,12 +51,12 @@
             </td>
             <td>
                 <form action="/answer/{{answer[0]}}/vote_up" >
-                <button>Vote up</button>
+                <button><img src="/static/buttons/try.png" width="18"></button>
                 </form>
             </td>
             <td>
                 <form action="/answer/{{answer[0]}}/vote_down" >
-                <button>Vote down</button>
+                <button><img src="/static/buttons/try2.png" width="18"></button>
                 </form>
             </td>
             <td>
@@ -63,8 +71,8 @@
     <form action="/question/{{question_id}}/new-answer">
         <button>Add answer</button>
     </form>
-    <br>
-    <a href="/list">Return to main page</a>
+    <br><br>
+    <a href="/list"><img src="/static/buttons/whiteback.png" alt="Return to home page" width="35"></a>
 
 </body>
 </html>
