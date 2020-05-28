@@ -16,7 +16,7 @@ def display_list():
     use_to_display = data_manager.get_display_list(list_of_questions)
     ordered_list=data_manager.get_an_order(use_to_display,list_of_questions,mode=mode,direction=direction)
     data_manager.write_csv("sample_data/question.csv",ordered_list)
-    return render_template("list.html", list_of_questions=list_of_questions)
+    return render_template("list.html", list_of_questions=ordered_list)
 
 
 
@@ -24,14 +24,18 @@ def display_list():
 def question_page(question_id):
     list_of_questions = data_manager.get_list_of_questions('sample_data/question.csv')
     list_of_answers = data_manager.get_list_of_questions('sample_data/answer.csv')
+
+    for question in list_of_questions:
+        if str(question_id) == question[0]:
+            question[2] = str(int(question[2]) + 1)
+
     correct_row = [i for i in range(len(list_of_questions)) if list_of_questions[i][0] == str(question_id)][0]
     title = list_of_questions[correct_row][4]
     question = list_of_questions[correct_row][5]
     image = list_of_questions[correct_row][6]
     str_id = str(question_id)
-
     question_answers = [answer for answer in list_of_answers if answer[3] == str_id]
-
+    data_manager.write_csv("sample_data/question.csv", list_of_questions)
     return render_template("question.html", question_id= question_id, title=title,
                            question=question, question_answers=question_answers, image=image)
 
