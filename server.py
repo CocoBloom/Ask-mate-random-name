@@ -2,6 +2,7 @@ from flask import Flask, request, render_template,redirect
 import data_manager
 import util
 import time
+import os
 
 
 app = Flask(__name__)
@@ -44,7 +45,11 @@ def question_page(question_id):
 def add_question():
     if request.method == "POST":
         list_of_questions = data_manager.get_list_of_questions("sample_data/question.csv")
-        new_question = [len(list_of_questions), int(time.time()), 0, 0, request.form['questiontitle'], request.form['questionbody'], request.form['questionimage']]
+        file = request.files['questionimage']
+        filename = file.filename
+        filename = os.path.join('static/', filename)
+        file.save(filename)
+        new_question = [len(list_of_questions), int(time.time()), 0, 0, request.form['questiontitle'], request.form['questionbody'], filename]
         list_of_questions.append(new_question)
         data_manager.write_csv("sample_data/question.csv", list_of_questions)
         return redirect('/list')
@@ -79,6 +84,7 @@ def edit_question(question_id):
                 question_image = question[6]
         return render_template("edit_question_new.html", question_text=question_text, question_title=question_title, question_id=question_id, question_image=question_image)
     else:
+
         for question in list_of_questions:
             if question[0] == question_id:
                 question[4] = request.form['edittitle']
