@@ -34,8 +34,8 @@
 <body>
     <form action="http://localhost:8000/list">
     <table class = center>
-    <caption id="caption"><img src="buttons/static/banner.png" alt="Ask-Question-Ask-Mate" width="60"><br>ASK_MATE<br>
-    <a href="add-question"><img src="buttons/static/realwhitebutton.png" alt="Ask-Question-Ask-Mate" width="80"></a></caption>
+    <caption id="caption"><img src="static/buttons/banner.png" alt="Ask-Question-Ask-Mate" width="60"><br>ASK_MATE<br>
+    <a href="add-question"><img src="static/buttons/realwhitebutton.png" alt="Ask-Question-Ask-Mate" width="80"></a></caption>
         <thead>
             {% for row in list_of_questions%}
                 <tr>
@@ -72,10 +72,10 @@
                     {%endfor%}
 
                     <td width ="80"><form action="/question/{{row[0]}}/vote_up">
-                        <button><img src="buttons/static/try.png" width="18"></button></form>
+                        <button><img src="static/buttons/try.png" width="18"></button></form>
 
                     <form action="/question/{{row[0]}}/vote_down" >
-                    <button><img src="buttons/static/try2.png" width="18"></button></form></td>
+                    <button><img src="static/buttons/try2.png" width="18"></button></form></td>
                 </tr>
             {%endif%}
         {%endfor%}
