@@ -84,12 +84,15 @@ def edit_question(question_id):
                 question_image = question[6]
         return render_template("edit_question_new.html", question_text=question_text, question_title=question_title, question_id=question_id, question_image=question_image)
     else:
-
+        file = request.files['editimage']
+        filename = file.filename
+        filename = os.path.join('static/', filename)
+        file.save(filename)
         for question in list_of_questions:
             if question[0] == question_id:
                 question[4] = request.form['edittitle']
                 question[5] = request.form['editbody']
-                question[6] = request.form['editimage']
+                question[6] = filename
         data_manager.write_csv("sample_data/question.csv", list_of_questions)
         return redirect('/question/'+ question_id)
 
@@ -99,8 +102,12 @@ def edit_question(question_id):
 def answer_page(question_id):
     if request.method == 'POST':
         list_of_answers = data_manager.get_list_of_questions('sample_data/answer.csv')
+        file = request.files['img']
+        filename = file.filename
+        filename = os.path.join('static/', filename)
+        file.save(filename)
         list_of_answers.append([len(list_of_answers), int(time.time()), 0, question_id,
-                                  request.form['answer'], request.form['img']])
+                                  request.form['answer'], filename])
         data_manager.write_csv("sample_data/answer.csv", list_of_answers)
         return redirect('/question/'+ question_id)
     return render_template("new_answer.html", question_id=question_id)

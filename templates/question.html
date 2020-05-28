@@ -43,7 +43,7 @@
         {% for answer in question_answers %}
         <tr style="height:100px" ><td>> {{ answer[4] }}</td>
                 <td>{% if answer[5] != '' %}
-                    <img src="{{ answer[5] }}" alt="pimpirimpi" height="100">
+                    <img src="/{{ answer[5] }}" alt="pimpirimpi" height="100">
                 {% endif %}
             </td>
             <td>

@@ -13,14 +13,14 @@
     <title>Edit question</title>
 </head>
 <body>
-<form action="/question/{{ question_id }}/edit" method="post" enctype=multipart/form-data">
+<form action="/question/{{ question_id }}/edit" method="post" enctype="multipart/form-data">
     <h1>Edit your question</h1>
     <input type="text" name="edittitle" placeholder="Question title" value={{question_title}}><br>
     <textarea name="editbody" rows="10" cols="50" placeholder="Place your question here">{{question_text}}</textarea>
     <br>
     <button type="submit">Submit</button>
     <button type="reset">Reset</button>
-    <input type=file name=questionimage>
+    <input type=file name="editimage">
     <br><br>
     <a href="/question/{{ question_id }}"><img src="/static/buttons/whiteback.png" alt="Return to question page" width="35"></a>
 </body>
