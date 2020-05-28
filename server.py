@@ -8,21 +8,16 @@ app = Flask(__name__)
 
 
 @app.route("/")
-@app.route('/list', methods=['GET','POST'])
+@app.route('/list', methods = ['GET','POST'])
 def display_list():
     list_of_questions = data_manager.get_list_of_questions("sample_data/question.csv")
-    if request.method == "POST":
-        for head in list_of_questions[0]:
-            try:
-                mode = request.form[head]
-                direction=data_manager.find_index(list_of_questions,mode)
-                ordered_list = data_manager.get_an_order(list_of_questions=list_of_questions, mode = mode, bool=direction)
-                data_manager.write_csv("sample_data/question.csv", new_data=ordered_list)
-            except:
-                continue
-        return redirect('/')
-    else:
-        return render_template("list.html", list_of_questions=list_of_questions)
+    mode = request.args.get('order_by')
+    direction = request.args.get('order_direction')
+    use_to_display = data_manager.get_display_list(list_of_questions)
+    ordered_list=data_manager.get_an_order(use_to_display,list_of_questions,mode=mode,direction=direction)
+    data_manager.write_csv("sample_data/question.csv",ordered_list)
+    return render_template("list.html", list_of_questions=list_of_questions)
+
 
 
 @app.route("/question/<int:question_id>")
