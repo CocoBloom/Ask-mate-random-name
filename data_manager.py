@@ -19,24 +19,15 @@ def get_display_list(list_of_questions):
 
 
 
-# used_list=(get_display_list(get_list_of_questions("próba.csv")))
-# print("get_display",used_list)
-
 def get_an_order(used_list,list_of_questions,mode,direction):
-    print(mode)
-    print(direction)
     if mode is None:
         mode='id'
-        direction='True'
-    print(mode)
-    print(direction)
+        direction='desc'
     index = (list_of_questions[0]).index(mode)
-    if direction == "True":
+    if direction == "desc":
         ordered_list = ([list_of_questions[0]] + sorted(used_list, key=lambda x: x[index], reverse=True))
-        print("trueorder",ordered_list)
     else:
         ordered_list = ([list_of_questions[0]] + sorted(used_list, key=lambda x: x[index], reverse=False))
-        print("falseorder",ordered_list)
     return ordered_list
 
 

@@ -47,8 +47,8 @@
                         <th>
                             <form action="http://localhost:8000/list" method="GET">
                             <input type="hidden" name="order_by" value="{{cell}}">{{cell.upper()}}<br><br>
-                            <button name="order_direction"style="background-color:#4CAF50" value="False">↑</button>
-                            <button name="order_direction" style="background-color:#4CAF50" value="True">↓</button>
+                            <button name="order_direction"style="background-color:#4CAF50" value="asc">↑</button>
+                            <button name="order_direction" style="background-color:#4CAF50" value="desc">↓</button>
                             </form>
                         </th>
                         {%endfor%}

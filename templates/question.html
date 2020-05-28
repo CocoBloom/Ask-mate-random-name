@@ -8,6 +8,20 @@
         background-attachment: fixed;
         background-position: center;
       }
+      .button {
+        background-color:  #3f87a6;
+        border: 2px solid white;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 20%;
+        }
+       h1,h2,h3,td {color:white;}
         </style>
     <meta charset="UTF-8">
     <title>Question | Ask mate</title>
@@ -26,12 +40,12 @@
     <table>
         <tr>
             <td><form action="/question/{{question_id}}/edit" >
-                <button>Edit</button>
+                <button class="button">Edit</button>
             </form>
             </td>
             <td>
             <form action="/question/{{question_id}}/delete" method="post">
-                <button>Delete</button>
+                <button class="button">Delete</button>
             </form>
             </td>
         </tr>
@@ -61,7 +75,7 @@
             </td>
             <td>
                 <form action="/answer/{{answer[0]}}/delete" >
-                <button>Delete</button>
+                <button class="button">Delete</button>
                 </form>
             </td>  </tr>
         {% endfor %}
@@ -69,7 +83,8 @@
 
     <br>
     <form action="/question/{{question_id}}/new-answer">
-        <button>Add answer</button>
+        <button class="button
+">Add answer</button>
     </form>
     <br><br>
     <a href="/list"><img src="/static/buttons/whiteback.png" alt="Return to home page" width="35"></a>
